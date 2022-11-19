@@ -1,4 +1,5 @@
-import "../styles/global.css"
+import 'regenerator-runtime/runtime';
+import "../styles/global.css";
 
 
 function MyApp({ Component, pageProps }) {

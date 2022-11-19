@@ -4,6 +4,9 @@ import Image from "next/image";
 import Webcam from "react-webcam";
 import { useState } from 'react';
 
+import DictaphoneDynamic from "../dynamic/Dictaphone.dynamic";
+
+
 export default function Home() {
 
   const [isScanning, setIsScanning] = useState(false);
@@ -15,9 +18,14 @@ export default function Home() {
 
   const classify = async () => {
     try {
-      const classifier = await ml5.soundClassifier('SpeechCommands18w', { probabilityThreshold: 0.9 });
-      classifier.classify(gotResult);
-      setIsScanning(false);
+      // Initialize the Image Classifier method with MobileNet
+      const classifier = ml5.imageClassifier('MobileNet',      
+      () => {
+        console.log('Model Loaded!');
+      });
+      // Make a prediction with a selected image
+      const data = await classifier.classify(document.getElementById('image_roadmap'));
+      console.log(data);
     } catch(err) {
       console.error(err)
     }
@@ -39,16 +47,17 @@ export default function Home() {
       </ul>
 
       <div>
-        {/* <Image id="image_roadmap" alt="roadmap" src={RoadMap}/> */}
+        <DictaphoneDynamic />
         {/* <Webcam id="video_id"/> */}
-        <button 
+        {/* <Image id="image_roadmap" alt="roadmap" src={RoadMap}/> */}
+        {/* <button 
           onClick={() => {
             setIsScanning(true);
             classify();
           }} 
           disabled={isScanning ? true : false}>
           Scan
-        </button>
+        </button> */}
       </div>
     </div>
   )
