@@ -4,17 +4,12 @@ import Image from "next/image";
 import Webcam from "react-webcam";
 import { useState } from 'react';
 
-import DictaphoneDynamic from "../dynamic/Dictaphone.dynamic";
+import DictaphoneDynamic from "../dynamicComponents/Dictaphone.dynamic";
 
 
 export default function Home() {
 
   const [isScanning, setIsScanning] = useState(false);
-
-  function gotResult(error, result) {
-    if (error) { console.log(error); return; }
-    console.log(result);
-  }
 
   const classify = async () => {
     try {
